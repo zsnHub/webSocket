@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>监控测试</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="websocket/swfobject.js"></script>
+    <script src="websocket/web_socket.js"></script>
+    <script src="js/list.js"></script>
+    <style>
+        .btn {
+            color: graytext;
+        }
+
+        .active {
+            color: buttontext;
+        }
+
+        table, table tr th, table tr td {
+            border: 1px solid #ddd;
+        }
+
+        table {
+            text-align: center;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            text-align: center;
+        }
+
+        .tractive {
+            background-color: #ddd;
+        }
+        .log {
+            word-wrap: break-word;
+            word-break: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        IP：<input type="text" id="ip" value="192.168.5.6" />
+        端口：<input type="text" id="port" value="8081" />
+        <button id="conn">连接</button>
+        <button id="close" disabled>断开</button>
+        <span style="color:red;" id="connmsg"></span>
+        <br /><br />
+        工号：<input type="text" id="usercode" value="8006" />
+        分机：<input type="text" id="extno" value="1006" />
+        <br /><br />
+        <input type="button" value="挂断" datafun="DropCall" id="DropCall" class="btn DropCall" />
+        <input type="button" value="置忙" datafun="SayBusy" id="SayBusy" class="btn SayBusy" />
+        <input type="button" value="置闲" datafun="SayFree" id="SayFree" class="btn SayFree" />
+        <input type="button" value="签入" datafun="Login" id="Login" class="btn Login" />
+        <input type="button" value="签出" datafun="Logout" id="Logout" class="btn Logout" />
+        <br /><br />
+        <button id="start" disabled>开始监测</button>
+        <button id="stop" disabled>停止监测</button>
+        <br /><br />
+        <button id="ForceAgentState" datafun="ForceAgentState" class="bzbtn" disabled>置闲</button>
+        <button id="Listen" datafun="ForceAgentState" class="bzbtn" disabled>监听</button>
+        <button id="Instead" datafun="ForceAgentState" class="bzbtn" disabled>代接</button>
+        <button id="Insert" datafun="ForceAgentState" class="bzbtn" disabled>强插</button>
+        <button id="Intercept" datafun="ForceAgentState" class="bzbtn" disabled>拦截</button>
+        <button id="Break" datafun="ForceAgentState" class="bzbtn" disabled>强拆</button>
+        <br /><br />
+        <span style="color:red;" id="msg"></span>
+        <br /><br />
+        <textarea id="content" style="position:absolute;top:-9999px;"></textarea>
+        <div style="width:49%;height:510px;overflow-y:auto; float:left;">
+            <table style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>状态</th>
+                        <th>时间</th>
+                        <th>工号</th>
+                        <th>分机号</th>
+                        <th>主叫号码</th>
+                        <th>被叫号码</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div style="width:1%;height:510px;overflow-y:auto;float:left;">
+        </div>
+        <div id="cont" style="width:49%;height:504px;border:1px solid #ddd;overflow-y:auto;float:left;">
+            <p></p>
+        </div>
+        <div style="clear:both;"></div>
+        <br />
+        <button id="clear">清除</button>
+        <button id="copy">复制</button>
+    </div>
+</body>
+
+</html>                       
